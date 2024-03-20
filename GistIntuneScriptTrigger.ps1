@@ -52,7 +52,7 @@ If ($Exec -eq "Quit") {
     Write-Host $RunCMDs[$response].Help
 }
 Else {
-    Write-Host "Running $Exec"
+    Write-Host "`nRunning $Exec" -ForegroundColor Yellow
     $wc = New-Object System.Net.WebClient
     $wc.Encoding = [System.Text.Encoding]::UTF8
     Invoke-Expression ($wc.DownloadString($Exec))
