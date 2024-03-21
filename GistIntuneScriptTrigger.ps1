@@ -1,7 +1,7 @@
 #iwr gist.ittips.ch/dev | iex
 $Branch = "dev"
-$Version = "v0.0.4"
-$LatestAddition = "(R) New-IntuneRegistryFavorites"
+$Version = "v0.0.5"
+$LatestAddition = "(5) New-IntuneRegistryFavorites"
 
 $GistCatalog = [ordered]@{
     'Get-Win32AppsOrder.ps1'            = @{
@@ -86,10 +86,10 @@ $moreinfo = @"
 
 Latest addition: 
  - $LatestAddition
- - New Menu Design
+ - Color output for elevated rights requirement
 
 Attention: 
- - Some scripts may requries admin rights
+ - Some scripts may require admin rights
 "@
 
 Write-host $moreinfo -ForegroundColor Yellow
@@ -100,8 +100,12 @@ if ($selection -match '^\d+$' -and $selection -ge 1 -and $selection -le $GistCat
     $scriptUri = $GistCatalog[([int]$selection - 1)].url
     $scriptAuthor = $GistCatalog[([int]$selection - 1)].author
     $scriptRequires_elevation = $GistCatalog[([int]$selection - 1)].requires_elevation
-    $ScriptInfo = "`n  Name: {0}`n  Author: {2}`n  Requires elevated rights: {3}`n  URL: {4}" -f $scriptTitle, $scriptUri, $scriptAuthor, $scriptRequires_elevation, $scriptUri
-    Write-host "You selected: $ScriptInfo" -ForegroundColor Green
+    #$ScriptInfo = "`n  Name: {0}`n  Author: {2}`n  Requires elevated rights: {3}`n  URL: {4}" -f $scriptTitle, $scriptUri, $scriptAuthor, $scriptRequires_elevation, $scriptUri
+    Write-Host "You selected:" -ForegroundColor Green
+    Write-Host "  Gist Name: $scriptTitle"
+    Write-Host "  Author: $scriptAuthor" -ForegroundColor DarkMagenta 
+    Write-Host "  Requires elevated rights: $scriptRequires_elevation" -ForegroundColor $(if ($scriptRequires_elevation) { 'Red' } else { 'Green' })
+    Write-Host "  URL: $scriptUri" -ForegroundColor Blue
     $confirmRun = $Host.UI.PromptForChoice('Run the Script', 'Are you sure you want to proceed?', @('&Yes'; '&No'), 0)
     if ($confirmRun -eq 0) {
         try {
