@@ -96,6 +96,7 @@ Write-host $moreinfo -ForegroundColor Yellow
 New-ConsoleMenu -Title $title -Options $GistCatalog
 $selection = Read-Host "Select a script by number"
 if ($selection -match '^\d+$' -and $selection -ge 1 -and $selection -le $GistCatalog.Count) {
+    write-host "selection: $selection" -ForegroundColor Green
     $scriptTitle = $GistCatalog.Keys[$selection - 1]
     $scriptUri = $GistCatalog[$selection - 1].url
     Write-host "You selected: $scriptTitle" -ForegroundColor Green
