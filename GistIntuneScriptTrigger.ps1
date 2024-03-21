@@ -1,5 +1,5 @@
 #iwr gist.ittips.ch/dev | iex
-$Branch = "dev"
+$Branch = "main"
 $Version = "v0.0.4"
 $LatestAddition = "(R) New-IntuneRegistryFavorites"
 
