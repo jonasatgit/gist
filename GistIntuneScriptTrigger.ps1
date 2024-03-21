@@ -49,7 +49,7 @@ Function New-ConsoleMenu {
         [Parameter(Mandatory = $true)]
         [string]$Title,
         [Parameter(Mandatory = $true)]
-        [hashtable]$Options
+        [System.Collections.Specialized.OrderedDictionary]$Options
     )
 
     $maxNameLengh = $Options.GetEnumerator() | ForEach-Object { $_.Name.Length } | Sort-Object -Descending | Select-Object -First 1
@@ -71,7 +71,7 @@ Function New-ConsoleMenu {
     $consoleMenu += "$([Char]0x2560)" + "$([Char]0x2550)" * $maxwidth + "$([Char]0x2563)"
     # menu items
     $i = 0
-    foreach ($option in $options.GetEnumerator()) {
+    foreach ($option in $Options.GetEnumerator()) {
         $i++
         $consoleMenu += "$([Char]0x2551)" + " " + "$i" + " " * (5 - $i.ToString().Length) + "$([Char]0x2551)" + " " + $option.Value.category + " " * (($maxCategoryLengh - $option.Value.category.Length) + 3) + "$([Char]0x2551)" + " " * 2 + $option.Name + " " * (($maxNameLengh - $option.Name.Length) + 1) + "$([Char]0x2551)" + " " + $option.Value.description + " " * (($maxDescriptionLengh - $option.Value.description.Length) + 1) + "$([Char]0x2551)"
     }
