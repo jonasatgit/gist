@@ -98,8 +98,8 @@ $selection = Read-Host "Select a script by number"
 if ($selection -match '^\d+$' -and $selection -ge 1 -and $selection -le $GistCatalog.Count) {
     $scriptTitle = $GistCatalog.Keys[$selection - 1]
     $scriptUri = $GistCatalog[$selection - 1].url
-    Write-host "You selected: `"$scriptTitle`"" -ForegroundColor Green
-    Write-host "URL: `"$scriptUri`"" -ForegroundColor Green
+    Write-host "You selected: $scriptTitle" -ForegroundColor Green
+    Write-host "URL: $scriptUri" -ForegroundColor Green
     $decision = $Host.UI.PromptForChoice('Run the Script', 'Are you sure you want to proceed?', @('&Yes'; '&No'), 0)
     if ($decision -eq 0) {
         try {
