@@ -1,6 +1,6 @@
 #iwr gist.ittips.ch/dev | iex
 $Branch = "dev"
-$Version = "v0.0.2"
+$Version = "v0.0.3"
 $LatestAddition = "(R) New-IntuneRegistryFavorites"
 
 $RunCMDs = @(
@@ -54,8 +54,20 @@ If ($Exec -eq "Quit") {
     Write-Host $RunCMDs[$response].Help
 }
 Else {
-    Write-Host "`nRunning $Exec" -ForegroundColor Yellow
-    $wc = New-Object System.Net.WebClient
-    $wc.Encoding = [System.Text.Encoding]::UTF8
-    Invoke-Expression ($wc.DownloadString($Exec))
+    Write-Host "`nExecuting $Exec" -ForegroundColor Green
+    
+    $decision = $Host.UI.PromptForChoice('Run the Script', 'Are you sure you want to proceed?', @('&Yes'; '&No'), 0)
+    if ($decision -eq 0) {
+        try {
+            $wc = New-Object System.Net.WebClient
+            $wc.Encoding = [System.Text.Encoding]::UTF8
+            Invoke-Expression ($wc.DownloadString($Exec))
+        }
+        catch {
+            Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "You selected No" -ForegroundColor Red
+    }
 }
