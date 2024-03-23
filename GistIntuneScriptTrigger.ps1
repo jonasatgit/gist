@@ -1,4 +1,4 @@
-$Branch = "main"
+$Branch = "dev"
 $Version = "v0.0.6"
 $Title = @"
 GIST - Gist Intune Script Trigger $Version ($Branch) by https://x.com/MrWyss 
