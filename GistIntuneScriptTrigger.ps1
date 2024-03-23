@@ -7,7 +7,7 @@ by https://x.com/MrWyss Source & Improvements: https://github.com/MrWyss-MSFT/gi
 Latest addition: $LatestAddition
 "@
 
-$mainObject = @(
+$GistCatalog = @(
     [ordered]@{
         Name        = "Get-Win32AppsOrder"
         Category    = "Intune"
@@ -231,6 +231,7 @@ Function New-ConsoleMenu {
 }
 #endregion
 
+
 Function Invoke-Gist {
     param (
         [Parameter(Mandatory = $true)]
@@ -239,10 +240,10 @@ Function Invoke-Gist {
     )
     Write-Host "You selected:" -ForegroundColor Green
     Write-Host "  Gist Name: $($ScriptObject.Name)" -ForegroundColor Green
+    Write-Host "  Description: $($ScriptObject.Description)" -ForegroundColor Green
     Write-Host "  Author: $($ScriptObject.Author)" -ForegroundColor DarkMagenta 
-    Write-Host "  Elevation Required?: $($ScriptObject.Elevation)" -ForegroundColor $(if ($($ScriptObject.Elevation)) { 'Red' } else { 'Green' })
-    Write-Host "  URL:$($ScriptObject.Url)" -ForegroundColor Blue
-    Write-Host "  Description: $($ScriptObject.Description)" -ForegroundColor Yellow
+    Write-Host "  Elevation Required: $($ScriptObject.Elevation)" -ForegroundColor $(if ($($ScriptObject.Elevation)) { 'Red' } else { 'Green' })
+    Write-Host "  URL: $($ScriptObject.Url)" -ForegroundColor Blue
 
     If ($NoConfirm) {
         $confirmRun = 0
@@ -262,16 +263,17 @@ Function Invoke-Gist {
     }
 }
 
+#if ("iwr gist.ittips.ch/dev/5 | iex" -match 'gist\.ittips\.ch/(?:test/|dev/)?(\d+)') {
 if ($($MyInvocation.MyCommand) -match 'gist\.ittips\.ch/(?:test/|dev/)?(\d+)') {
-    $paramScriptNumber = $($matches[1])
-    Invoke-Gist -ScriptObject $mainObject[$paramScriptNumber - 1] -NoConfirm
+    [int]$paramScriptNumber = $($matches[1])
+    Invoke-Gist -ScriptObject $GistCatalog[$paramScriptNumber - 1] -NoConfirm
 }
 else {
     $selection = -1
     $cleared = $false
 
     do {
-        New-ConsoleMenu -Title $Title -Options $mainObject -ExcludeProperties 'Url'
+        New-ConsoleMenu -Title $Title -Options $GistCatalog -ExcludeProperties 'Url'
     
         if ($cleared) {
             Write-Host "`"$($selection)`" is invalid. Use any of the shown numbers or type `"Q`" to quit" -ForegroundColor Yellow
@@ -286,15 +288,9 @@ else {
 
         # test if the selection is a number
         # test if selection is between 1 and the number of options
-        if ($selection -match '^\d+$' -and $selection -ge 1 -and $selection -le $mainObject.Count) {
+        if ($selection -match '^\d+$' -and $selection -ge 1 -and $selection -le $GistCatalog.Count) {
             Clear-Host
-            Invoke-Gist -ScriptObject $mainObject[$selection - 1]
-            <#
-        $scriptTitle = $mainObject[$selection-1].Name
-        $scriptUri = $mainObject[$selection-1].Url
-        Write-host "You selected: `"$scriptTitle`"" -ForegroundColor Green
-        Write-host "URL: `"$scriptUri`"" -ForegroundColor Green
-        #>
+            Invoke-Gist -ScriptObject $GistCatalog[$selection - 1]
 
         } 
         else {
@@ -303,5 +299,5 @@ else {
         }
     
     }
-    until ($selection -match '^\d+$' -and $selection -ge 1 -and $selection -le $mainObject.Count)
+    until ($selection -match '^\d+$' -and $selection -ge 1 -and $selection -le $GistCatalog.Count)
 }
