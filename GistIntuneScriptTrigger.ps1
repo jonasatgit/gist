@@ -43,7 +43,7 @@ $GistCatalog = @(
         Name        = "New-IntuneRegistryFavorites"
         Category    = "Intune"
         Url         = "https://gist.githubusercontent.com/MrWyss-MSFT/500b2270b0b23b2fdc9ddc78092c355d/raw/9e3237f26674e2b0ad69b585849797fb731da0f2/New-IntuneRegistryFavorites.ps1"
-        Description = "Create Registry Favorites for Intune and Autopilot Settings"
+        Description = "Create Registry Favorites for Intune and Autopilot"
         Author      = "MrWyss-MSFT"
         Elevation   = $false
     }
