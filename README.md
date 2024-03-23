@@ -1,4 +1,5 @@
 # GIST - Gist Intune Script Trigger
+
 <p align="center">
   <img alt="ai Intune Device Classification logo" src="_res/logo/gist_logo.png" width="400">
 </p>
@@ -28,6 +29,12 @@ iwr gist.ittips.ch | iex
 
 ```powershell
 iwr gist.ittips.ch/dev | iex
+```
+
+#### Direct script call with gist number
+
+```powershell
+iwr gist.ittips.ch/5 | iex
 ```
 
 ## Contribute
