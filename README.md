@@ -45,7 +45,7 @@ If you are the **author** of a script that you would like to add, create an issu
 
 - Script is **not harmful**
 - Script **does not** change system settings
-- Script **does not** depend on external components (e.g. Modules, other scripts, radom content from the internet)
+- Script **does not** depend on external components (e.g. Modules, other scripts, random content from the internet)
 - Does **not require parameters** (as for now)
 
 Any other suggestions, issues and such:  [Issue](https://github.com/MrWyss-MSFT/gist/issues/new/choose)
