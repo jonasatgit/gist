@@ -1,10 +1,10 @@
 $global:HostVar = $Host
 $Branch = "dev"
-$Version = "v0.0.7"
+$Version = "v0.0.8"
 $Title = @"
 GIST - Gist Intune Script Trigger $Version ($Branch) by https://x.com/MrWyss 
 Source: https://github.com/MrWyss-MSFT/gist
-`u{1F195}: New Menu by jonasgit & directly call scripts by number (e.g. iwr gist.ittips.ch/5 | iex)
+`u{1F195}: Entries: BITS-Monitor & DO-Monitor thx to jonasatgit
 "@
 
 $GistCatalog = @(
@@ -48,6 +48,23 @@ $GistCatalog = @(
         Author      = "MrWyss-MSFT"
         Elevation   = $false
     }
+    [ordered] @{
+        Name        = "BITS-Monitor"
+        Category    = "Windows"
+        Url         = "https://raw.githubusercontent.com/jonasatgit/scriptrepo/db8ef5947043535acf6118ed0cd9e9aa82c2ec23/General/BITS-Monitor.ps1"
+        Description = "Script to monitor BITS transfer jobs. Will refresh every five seconds"
+        Author      = "Jonasatgit"
+        Elevation   = $true
+    }
+    [ordered] @{
+        Name        = "DO-Monitor"
+        Category    = "Windows"
+        Url         = "https://raw.githubusercontent.com/jonasatgit/scriptrepo/e2f18b378d4aefea32b649be371d87351366136b/General/DO-Monitor.ps1"
+        Description = "Script to monitor Delivery Optimization jobs. Will refresh every two seconds"
+        Author      = "Jonasatgit"
+        Elevation   = $true
+    }
+
 )
 
 # Class to create a console menu
