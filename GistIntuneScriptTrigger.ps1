@@ -355,7 +355,9 @@ Function Invoke-Gist {
         try {
             $wc = New-Object System.Net.WebClient
             $wc.Encoding = [System.Text.Encoding]::UTF8
-            Invoke-Expression ($wc.DownloadString($($ScriptObject.Url)))
+            #Invoke-Expression ($wc.DownloadString($($ScriptObject.Url)))
+            $runString = $wc.DownloadString($($ScriptObject.Url))
+            $runString | Invoke-Expression
         }
         catch {
             Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
