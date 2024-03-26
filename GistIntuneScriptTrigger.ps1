@@ -357,7 +357,7 @@ Function Invoke-Gist {
             $wc.Encoding = [System.Text.Encoding]::UTF8
             #Invoke-Expression ($wc.DownloadString($($ScriptObject.Url)))
             $runString = $wc.DownloadString($($ScriptObject.Url))
-            $runString
+            Write-Output $runString
             #$runString | Invoke-Expression
         }
         catch {
